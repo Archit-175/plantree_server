@@ -27,7 +27,7 @@ app.post('/submit', async (req, res) => {
     // Send thank you email to donor
     const mailOptions = {
         from: 'architsavaliya175@gmail.com',
-      to: 'architsavaliya175@gmail.com',
+      to: email,
       subject: "Thank You for Your Donation",
       html: `
         <h2>Thank You for Your Donation!</h2>
