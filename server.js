@@ -19,10 +19,8 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/submit', async (req, res) => {
-  const { name, email, phone, country, message,total } = req.body;
+  const { name, email, phone, country, message,plant_quantity_oak } = req.body;
     console.log(req.body);
-  const totalDonation = req.body.total;
-
 
     // Send thank you email to donor
     const mailOptions = {
@@ -32,7 +30,7 @@ app.post('/submit', async (req, res) => {
       html: `
         <h2>Thank You for Your Donation!</h2>
         <p>Dear ${name},</p>
-        <p>We greatly appreciate your generous donation of $${total} to our tree planting initiative. Your contribution will help us make the world a greener place.</p>
+        <p>We greatly appreciate your generous donation of $${plant_quantity_oak} to our tree planting initiative. Your contribution will help us make the world a greener place.</p>
         <p>Thank you for your support!</p>
         <p>Best regards,</p>
         <p>The Plant Donation Team</p>
