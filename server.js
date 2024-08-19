@@ -32,7 +32,7 @@ app.post('/submit', async (req, res) => {
       html: `
         <h2>Thank You for Your Donation!</h2>
         <p>Dear ${name},</p>
-        <p>We greatly appreciate your generous donation of $${totalDonation} to our tree planting initiative. Your contribution will help us make the world a greener place.</p>
+        <p>We greatly appreciate your generous donation of $${total} to our tree planting initiative. Your contribution will help us make the world a greener place.</p>
         <p>Thank you for your support!</p>
         <p>Best regards,</p>
         <p>The Plant Donation Team</p>
