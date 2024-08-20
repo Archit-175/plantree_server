@@ -219,15 +219,15 @@
                 <div class="plant-options">
                     <div class="plant-option">
                         <label>Oak ($10)</label>
-                        <input type="number" name="plant_quantity_oak" data-plant="oak" data-price="10" min="0" value="0">
+                        <input type="number" id="plant_quantity" name="plant_quantity_oak" data-plant="oak" data-price="10" min="0" value="0">
                     </div>
                     <div class="plant-option">
                         <label>Maple ($15)</label>
-                        <input type="number" name="plant_quantity_maple" data-plant="maple" data-price="15" min="0" value="0">
+                        <input type="number" id="plant_quantity" name="plant_quantity_maple" data-plant="maple" data-price="15" min="0" value="0">
                     </div>
                     <div class="plant-option">
                         <label>Pine ($12)</label>
-                        <input type="number" name="plant_quantity_pine" data-plant="pine" data-price="12" min="0" value="0">
+                        <input type="number" id="plant_quantity" name="plant_quantity_pine" data-plant="pine" data-price="12" min="0" value="0">
                     </div>
                 </div>
                 <div class="total-price">
@@ -256,9 +256,9 @@
         const mess = document.getElementById("message");
 
         // Get all quantity inputs and the total element
-        const plantQuantityInputs = document.querySelectorAll('input[name="plant-quantity"]');
+        const plantQuantityInputs = document.querySelectorAll('input[id="plant_quantity"]');
         const totalElement = document.getElementById('total');
-
+        
         // Function to calculate and update the total price
         function updateTotalPrice() {
             let total = 0;
@@ -276,41 +276,7 @@
             input.addEventListener('input', updateTotalPrice);
         });
 
-        // function sendEmail() {
-        //     let donatedPlants = [];
-        //     plantQuantityInputs.forEach(input => {
-        //         const quantity = parseInt(input.value);
-        //         if (quantity > 0) {
-        //             donatedPlants.push(`${quantity} ${input.dataset.plant}(s)`);
-        //         }
-        //     });
 
-        //     const bodyMessage = `Full Name: ${fullName.value}<br>
-        //         Email: ${email.value}<br>
-        //         Phone Number: ${phone.value}<br>
-        //         Country: ${country.value}<br>
-        //         Donated Plants: ${donatedPlants.join(', ')}<br>
-        //         Total Donation: $${totalElement.textContent}<br>
-        //         Message: ${mess.value}`;
-
-        //     Email.send({
-        //         SecureToken: "b9f37df3-108e-4e43-9fba-362bc0ff776d",
-        //         To: 'u23ai038@coed.svnit.ac.in',
-        //         From: "u23ai038@coed.svnit.ac.in",
-        //         Subject: "Plant Donation and Contact Form Submission",
-        //         Body: bodyMessage
-        //     }).then(
-        //         message => {
-        //             if (message == "OK") {
-        //                 Swal.fire({
-        //                     title: "Success!",
-        //                     text: "Your message and donation details sent successfully!",
-        //                     icon: "success"
-        //                 });
-        //             }
-        //         }
-        //     );
-        // }
 
         function checkInput() {
             const items = document.querySelectorAll(".item");
@@ -362,64 +328,8 @@
                 email.parentElement.classList.remove("error");
             }
         }
-
-        // form.addEventListener("submit", (e) => {
-        //     e.preventDefault();
-        //     checkInput();
-
-        //     if (!fullName.classList.contains("error") && !email.classList.contains("error") && !phone.classList.contains("error") && !mess.classList.contains("error")) {
-        //         sendEmail();
-
-        //         form.reset();
-        //         plantQuantityInputs.forEach(input => input.value = "0");
-        //         updateTotalPrice();
-        //         return false;
-        //     }
-        // });
-
-        // Initial call to set total to 0
         updateTotalPrice();
 
-//         form.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     checkInput();
-
-//     if (!fullName.classList.contains("error") && !email.classList.contains("error") && !phone.classList.contains("error") && !mess.classList.contains("error")) {
-//         const formData = new FormData(form);
-//         fetch('/submit', {
-//             method: 'POST',
-//             body: formData
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.success) {
-//                 Swal.fire({
-//                     title: "Success!",
-//                     text: "Your message and donation details sent successfully!",
-//                     icon: "success"
-//                 });
-//                 form.reset();
-//                 plantQuantityInputs.forEach(input => input.value = "0");
-//                 updateTotalPrice();
-//             } else {
-//                 Swal.fire({
-//                     title: "Error!",
-//                     text: "There was an error sending your message. Please try again.",
-//                     icon: "error"
-//                 });
-//             }
-//         })
-//         // .catch(error => {
-//         //     console.error('Error:', error);
-//         //     Swal.fire({
-//         //         title: "Error!",
-//         //         text: "There was an error sending your message. Please try again.",
-//         //         icon: "error"
-//         //     });
-//         // });
-//     }
-// });
-    
     </script>
 </body>
 

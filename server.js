@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 app.post('/submit', async (req, res) => {
   const { name, email, phone, country, message,plant_quantity_oak,plant_quantity_maple,plant_quantity_pine } = req.body;
     console.log(req.body);
-    total = plant_quantity_oak * 10
+    total = plant_quantity_oak * 10 + plant_quantity_maple * 15 + plant_quantity_pine * 12
     // Send thank you email to donor
     const mailOptions = {
         from: 'crawlers175@gmail.com',
