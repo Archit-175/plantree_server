@@ -329,7 +329,19 @@
             }
         }
         updateTotalPrice();
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            checkInput();
 
+            if (!fullName.classList.contains("error") && !email.classList.contains("error") && !phone.classList.contains("error") && !mess.classList.contains("error")) {
+                sendEmail();
+
+                form.reset();
+                plantQuantityInputs.forEach(input => input.value = "0");
+                updateTotalPrice();
+                return false;
+            }
+        });
     </script>
 </body>
 
