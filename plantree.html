@@ -191,26 +191,24 @@
 <body>
     <section class="contact">
         <h2>Plant Tree</h2>
-
-        <form action="/submit" method="POST">
-            
+        <form id="donationForm" action="/submit" method="POST">
             <div class="input-box">
                 <div class="input-field field">
-                    <input type="text" placeholder="Full Name" name="name" id="name" class="item" autocomplete="off">
+                    <input type="text" placeholder="Full Name" name="name" id="name" class="item" autocomplete="off" required>
                     <div class="error-txt">Full Name can't be blank</div>
                 </div>
                 <div class="input-field field">
-                    <input type="text" name="email" placeholder="Email Address" id="email" class="item" autocomplete="off">
+                    <input type="email" name="email" placeholder="Email Address" id="email" class="item" autocomplete="off" required>
                     <div class="error-txt email">Email Address can't be blank</div>
                 </div>
             </div>
             <div class="input-box">
                 <div class="input-field field">
-                    <input type="text" name="phone" placeholder="Phone Number" id="phone" class="item" autocomplete="off">
+                    <input type="text" name="phone" placeholder="Phone Number" id="phone" class="item" autocomplete="off" required>
                     <div class="error-txt">Phone Number can't be blank</div>
                 </div>
                 <div class="input-field field">
-                    <input type="text" name="country" placeholder="Country" id="country" class="item" autocomplete="off">
+                    <input type="text" name="country" placeholder="Country" id="country" class="item" autocomplete="off" required>
                     <div class="error-txt">Country can't be blank</div>
                 </div>
             </div>
@@ -223,11 +221,11 @@
                     </div>
                     <div class="plant-option">
                         <label>Maple ($15)</label>
-                        <input type="number" name="plant-quantity-maple" data-plant="maple" data-price="15" min="0" value="0">
+                        <input type="number" name="plant_quantity_maple" data-plant="maple" data-price="15" min="0" value="0">
                     </div>
                     <div class="plant-option">
                         <label>Pine ($12)</label>
-                        <input type="number" name="plant-quantity-pine" data-plant="pine" data-price="12" min="0" value="0">
+                        <input type="number" name="plant_quantity_pine" data-plant="pine" data-price="12" min="0" value="0">
                     </div>
                 </div>
                 <div class="total-price">
@@ -236,190 +234,83 @@
             </div>
             <div class="textarea-field field">
                 <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message" class="item"
-                    autocomplete="off"></textarea>
+                    autocomplete="off" required></textarea>
                 <div class="error-txt">Message can't be blank</div>
             </div>
             <button type="submit">Send Message</button>
         </form>
-
     </section>
 
-    <!-- <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const form = document.querySelector('form');
-        const fullName = document.getElementById("name");
-        const email = document.getElementById("email");
-        const phone = document.getElementById("phone");
-        const country = document.getElementById("country");
-        const mess = document.getElementById("message");
+       document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('donationForm');
+    const plantQuantityInputs = document.querySelectorAll('.plant-option input[type="number"]');
+    const totalElement = document.getElementById('total');
 
-        // Get all quantity inputs and the total element
-        const plantQuantityInputs = document.querySelectorAll('input[name="plant-quantity"]');
-        const totalElement = document.getElementById('total');
-
-        // Function to calculate and update the total price
-        function updateTotalPrice() {
-            let total = 0;
-            plantQuantityInputs.forEach(input => {
-                const quantity = parseInt(input.value);
-                const price = parseFloat(input.dataset.price);
-                total += quantity * price;
-            });
-            totalElement.textContent = total.toFixed(2);
-        }
-
-        // Add event listeners to all quantity inputs
+    // Function to calculate and update the total price
+    function updateTotalPrice() {
+        let total = 0;
         plantQuantityInputs.forEach(input => {
-            input.addEventListener('change', updateTotalPrice);
-            input.addEventListener('input', updateTotalPrice);
+            const quantity = parseInt(input.value);
+            const price = parseFloat(input.dataset.price);
+            total += quantity * price;
         });
+        totalElement.textContent = total.toFixed(2);
+    }
 
-        // function sendEmail() {
-        //     let donatedPlants = [];
-        //     plantQuantityInputs.forEach(input => {
-        //         const quantity = parseInt(input.value);
-        //         if (quantity > 0) {
-        //             donatedPlants.push(`${quantity} ${input.dataset.plant}(s)`);
-        //         }
-        //     });
+    // Add event listeners to all quantity inputs
+    plantQuantityInputs.forEach(input => {
+        input.addEventListener('change', updateTotalPrice);
+        input.addEventListener('input', updateTotalPrice);
+    });
 
-        //     const bodyMessage = `Full Name: ${fullName.value}<br>
-        //         Email: ${email.value}<br>
-        //         Phone Number: ${phone.value}<br>
-        //         Country: ${country.value}<br>
-        //         Donated Plants: ${donatedPlants.join(', ')}<br>
-        //         Total Donation: $${totalElement.textContent}<br>
-        //         Message: ${mess.value}`;
+    // Initial call to set total to 0
+    updateTotalPrice();
 
-        //     Email.send({
-        //         SecureToken: "b9f37df3-108e-4e43-9fba-362bc0ff776d",
-        //         To: 'u23ai038@coed.svnit.ac.in',
-        //         From: "u23ai038@coed.svnit.ac.in",
-        //         Subject: "Plant Donation and Contact Form Submission",
-        //         Body: bodyMessage
-        //     }).then(
-        //         message => {
-        //             if (message == "OK") {
-        //                 Swal.fire({
-        //                     title: "Success!",
-        //                     text: "Your message and donation details sent successfully!",
-        //                     icon: "success"
-        //                 });
-        //             }
-        //         }
-        //     );
-        // }
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-        function checkInput() {
-            const items = document.querySelectorAll(".item");
+        const formData = new FormData(form);
+        const totalDonation = totalElement.textContent;
 
-            for (const item of items) {
-                if (item.value == "") {
-                    item.classList.add("error");
-                    item.parentElement.classList.add("error");
-                }
+        // Append total donation amount to formData
+        formData.append('totalDonation', totalDonation);
 
-                if (items[1].value != "") {
-                    checkEmail();
-                }
-
-                items[1].addEventListener("keyup", () => {
-                    checkEmail();
+        fetch('/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: "Success!",
+                    text: `Your message and donation details were sent successfully! Total Donation: $${totalDonation}`,
+                    icon: "success"
+                }).then(() => {
+                    form.reset();
+                    plantQuantityInputs.forEach(input => input.value = "0");
+                    updateTotalPrice();
                 });
-
-                item.addEventListener("keyup", () => {
-                    if (item.value != "") {
-                        item.classList.remove("error");
-                        item.parentElement.classList.remove("error");
-                    }
-                    else {
-                        item.classList.add("error");
-                        item.parentElement.classList.add("error");
-                    }
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: "There was an error sending your message. Please try again.",
+                    icon: "error"
                 });
             }
-        }
-
-        function checkEmail() {
-            const emailRegex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/;
-            const errorTxtEmail = document.querySelector(".error-txt.email");
-
-            if (!email.value.match(emailRegex)) {
-                email.classList.add("error");
-                email.parentElement.classList.add("error");
-
-                if (email.value != "") {
-                    errorTxtEmail.textContent = "Invalid Email Address";
-                }
-                else {
-                    errorTxtEmail.textContent = "Email Address can't be blank";
-                }
-            }
-            else {
-                email.classList.remove("error");
-                email.parentElement.classList.remove("error");
-            }
-        }
-
-        // form.addEventListener("submit", (e) => {
-        //     e.preventDefault();
-        //     checkInput();
-
-        //     if (!fullName.classList.contains("error") && !email.classList.contains("error") && !phone.classList.contains("error") && !mess.classList.contains("error")) {
-        //         sendEmail();
-
-        //         form.reset();
-        //         plantQuantityInputs.forEach(input => input.value = "0");
-        //         updateTotalPrice();
-        //         return false;
-        //     }
-        // });
-
-        // Initial call to set total to 0
-        updateTotalPrice();
-
-//         form.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     checkInput();
-
-//     if (!fullName.classList.contains("error") && !email.classList.contains("error") && !phone.classList.contains("error") && !mess.classList.contains("error")) {
-//         const formData = new FormData(form);
-//         fetch('/submit', {
-//             method: 'POST',
-//             body: formData
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.success) {
-//                 Swal.fire({
-//                     title: "Success!",
-//                     text: "Your message and donation details sent successfully!",
-//                     icon: "success"
-//                 });
-//                 form.reset();
-//                 plantQuantityInputs.forEach(input => input.value = "0");
-//                 updateTotalPrice();
-//             } else {
-//                 Swal.fire({
-//                     title: "Error!",
-//                     text: "There was an error sending your message. Please try again.",
-//                     icon: "error"
-//                 });
-//             }
-//         })
-//         // .catch(error => {
-//         //     console.error('Error:', error);
-//         //     Swal.fire({
-//         //         title: "Error!",
-//         //         text: "There was an error sending your message. Please try again.",
-//         //         icon: "error"
-//         //     });
-//         // });
-//     }
-// });
-    
-    </script>
+        })
+        .catch(error => {
+            Swal.fire({
+                title: "Error!",
+                text: "An unexpected error occurred.",
+                icon: "error"
+            });
+        });
+    });
+});
+  </script>
 </body>
 
 </html>
