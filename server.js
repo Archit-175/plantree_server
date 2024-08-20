@@ -126,6 +126,7 @@ app.post('/submit', async (req, res) => {
 				display: table !important;
 				max-height: none !important;
 			}
+
 		}
 	</style><!--[if mso ]><style>sup, sub { font-size: 100% !important; } sup { mso-text-raise:10% } sub { mso-text-raise:-10% }</style> <![endif]-->
 </head>
@@ -176,7 +177,7 @@ app.post('/submit', async (req, res) => {
 <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
 <tr>
 <td class="pad" style="padding-bottom:15px;padding-left:50px;padding-right:50px;text-align:center;width:100%;">
-<h1 style="margin: 0; color: #ffffff; direction: ltr; font-family: 'Bitter', Georgia, Times, 'Times New Roman', serif; font-size: 61px; font-weight: normal; letter-spacing: -2px; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 73.2px;"><span class="tinyMce-placeholder" style="word-break: break-word;"><br/>Thank You For Planting Tree</span></h1>
+<h1 style="margin: 0; color: #ffffff; direction: ltr; font-family: 'Bitter', Georgia, Times, 'Times New Roman', serif; font-size: 50px; font-weight: normal; letter-spacing: -2px; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 73.2px;" ><span class="tinyMce-placeholder" style="word-break: break-word;"><br/>Thank You For Planting Tree</span></h1>
 </td>
 </tr>
 </table>
