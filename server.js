@@ -439,16 +439,27 @@ app.post('/submit', async (req, res) => {
     };
 
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log(error);
-          res.status(500).send('Error sending email');
-        } else {
-          console.log('Email sent: ' + info.response);
-          res.status(200).send('Receipt email sent');
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //     if (error) {
+    //       console.log(error);
+    //       res.status(500).send('Error sending email');
+    //     } else {
+    //       console.log('Email sent: ' + info.response);
+    //       res.status(200).send('Receipt email sent');
          
-        }
-      });
+    //     }
+    //   });
+	
+	transporter.sendMail(mailOptions, (error, info) => {
+		if (error) {
+		  console.log(error);
+		  res.status(500).send('Error sending email'); // Redirect to an error page
+		} else {
+		  console.log('Email sent: ' + info.response);
+		  res.status(200).redirect('http://127.0.0.1:5500/'); // Redirect to a success page
+		}
+	  });
+	  
     });
 
     app.get('/', (req, res) => {
