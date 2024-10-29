@@ -456,7 +456,7 @@ app.post('/submit', async (req, res) => {
 		  res.status(500).send('Error sending email'); // Redirect to an error page
 		} else {
 		  console.log('Email sent: ' + info.response);
-		  res.status(200).redirect('http://127.0.0.1:3000/'); // Redirect to a success page
+		  res.status(200).redirect('https://crawlers-one.vercel.app'); // Redirect to a success page
 		}
 	  });
 	  
