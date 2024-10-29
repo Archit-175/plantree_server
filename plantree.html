@@ -14,7 +14,8 @@
         padding: 0;
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
-    }
+}
+
 
     body {
         background-color: #1a1a1a;
@@ -288,7 +289,6 @@
                     item.parentElement.classList.add("error");
                 }
 
-<<<<<<< Updated upstream
                 if (items[1].value != "") {
                     checkEmail();
                 }
@@ -309,7 +309,6 @@
                 });
             }
         }
-
         function checkEmail() {
             const emailRegex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/;
             const errorTxtEmail = document.querySelector(".error-txt.email");
@@ -318,46 +317,7 @@
                 email.classList.add("error");
                 email.parentElement.classList.add("error");
 
-=======
-        function checkInput() {
-            const items = document.querySelectorAll(".item");
 
-            for (const item of items) {
-                if (item.value == "") {
-                    item.classList.add("error");
-                    item.parentElement.classList.add("error");
-                }
-
-                if (items[1].value != "") {
-                    checkEmail();
-                }
-
-                items[1].addEventListener("keyup", () => {
-                    checkEmail();
-                });
-
-                item.addEventListener("keyup", () => {
-                    if (item.value != "") {
-                        item.classList.remove("error");
-                        item.parentElement.classList.remove("error");
-                    }
-                    else {
-                        item.classList.add("error");
-                        item.parentElement.classList.add("error");
-                    }
-                });
-            }
-        }
-
-        function checkEmail() {
-            const emailRegex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/;
-            const errorTxtEmail = document.querySelector(".error-txt.email");
-
-            if (!email.value.match(emailRegex)) {
-                email.classList.add("error");
-                email.parentElement.classList.add("error");
-
->>>>>>> Stashed changes
                 if (email.value != "") {
                     errorTxtEmail.textContent = "Invalid Email Address";
                 }
@@ -371,7 +331,7 @@
             }
         }
         updateTotalPrice();
-<<<<<<< Updated upstream
+    
         // form.addEventListener("submit", (e) => {
         //     e.preventDefault();
         //     checkInput();
@@ -384,7 +344,7 @@
         //         return false;
         //     }
         // });
-=======
+
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             checkInput();
@@ -397,7 +357,7 @@
                 return false;
             }
         });
->>>>>>> Stashed changes
+
     </script>
 </body>
 
